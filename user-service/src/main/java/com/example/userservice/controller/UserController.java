@@ -14,6 +14,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,16 @@ public class UserController {
     userList.forEach(v -> result.add(new ModelMapper().map(v, ResponseUser.class)));
 
     return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
+
+  @GetMapping("/users/{userId}")
+  public ResponseEntity getUser(@PathVariable String userId) {
+
+    UserDto userDto = userService.getUserByUserId(userId);
+    ResponseUser result = new ModelMapper().map(userDto, ResponseUser.class);
+
+    return ResponseEntity.status(HttpStatus.OK).body(result);
+
   }
 
 
