@@ -3,16 +3,27 @@ server:
 
 spring:
   application:
-    name: user-service
+    name: catalog-service
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: true
       path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+    database: h2
+    defer-datasource-initialization: true
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+
 
 eureka:
   client:
@@ -23,9 +34,6 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-greeting:
-  message: welcome!
-
 logging:
   level:
-    com.example.userservice: DEBUG
+    com.example.catalogservice: warn

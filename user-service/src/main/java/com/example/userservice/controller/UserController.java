@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -68,7 +68,6 @@ public class UserController {
     ResponseUser result = new ModelMapper().map(userDto, ResponseUser.class);
 
     return ResponseEntity.status(HttpStatus.OK).body(result);
-
   }
 
 
